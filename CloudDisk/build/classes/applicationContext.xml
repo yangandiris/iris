@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd">
+ 
+	<context:component-scan base-package="com"/>
+	<aop:aspectj-autoproxy />  
+   <!--Hibernate  dataSource模块  -->
+   
+      <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/test" />
+		<property name="username" value="root" />
+		<property name="password" value="admin" />
+      </bean> 
+   <!--   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:csfc" />
+		<property name="username" value="yang" />
+		<property name="password" value="yang" />
+   </bean>   -->
+    <!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="url" value="jdbc:db2://127.0.0.1:50000/YANG" />
+		<property name="username" value="db2admin" />
+		<property name="password" value="admin" />
+   </bean>   -->
+ <!--Hibernate  sessionFactory模块  -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		
+		<!-- <property name="annotatedClasses"> -->
+		<property name="packagesToScan"><!--自动加载目录下所有实体类 -->
+			<list>
+				<value>com</value>
+			</list>
+		</property>
+		 <property name="hibernateProperties">
+			<value>
+			    hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.show_sql=false
+				hibernate.format_sql=true
+				hibernate.hbm2ddl.auto=update
+				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
+			</value>
+		</property> 
+		<!--  <property name="hibernateProperties">
+			<value>
+			    hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+				hibernate.show_sql=false
+				hibernate.format_sql=true
+				hibernate.hbm2ddl.auto=create
+				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
+			</value>
+		</property>  -->
+		<!-- <property name="hibernateProperties">
+			<value>
+			    hibernate.dialect=org.hibernate.dialect.DB2Dialect
+				hibernate.show_sql=false
+				hibernate.format_sql=true
+				hibernate.hbm2ddl.auto=create
+				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
+			</value>
+		</property> -->
+	</bean>
+	
+	<!--Hibernate  事务管理模块  -->
+    <bean id="transactionManager"
+		 class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean> 
+	 
+		
+	<tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true" /> 
+	
+</beans>
