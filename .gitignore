@@ -2,3 +2,5 @@
 RemoteSystemsTempFiles/
 Servers/
 /*.gitignore
+/*.database.properties
+/*.generatorConfig.xml
