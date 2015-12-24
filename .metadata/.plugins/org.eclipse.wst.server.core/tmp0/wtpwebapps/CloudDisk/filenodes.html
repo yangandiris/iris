@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>file move iframe</title>
+<link rel="stylesheet" type="text/css"href="ztree/zTreeStyle.css" />
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" >
+var name=parent.username;
+$.post("getfilesnodes.action?path="+name,function(data){
+		var nodes=[]
+	    nodes.push({id:1,pId:0,name:'根目录',isParent:true,open:true})
+		$.each(data.node, function(i) {
+			nodes.push({id:data.node[i][0],pId:data.node[i][1],name:data.node[i][2],isParent:true})
+			
+ 		})
+		var setting = {
+			data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onClick: function(event,treeId, treeNode){
+				var url=''
+				for(;'根目录'!=treeNode.name;){
+					url=('/'+treeNode.name).concat(url);
+					treeNode=treeNode.getParentNode();
+				}
+				url=(name).concat(url)
+				var removeitem=[];
+				var p=parent.window.document.getElementById('filepages');
+				var f=$(p).find('.filelist-item-over')
+				for(var i=0;i<f.length;i++){
+					var parenturl=$(f[i]).find('parent').html();
+					if(null!=url.match( parenturl)){
+						parent.stopmove();
+						return;
+					}
+					var fileid=$(f[i]).find('fileid').html();
+					removeitem.push(fileid+':'+parenturl);
+				}
+				$.post('fileremove.action',{'path':url,'removeitem':JSON.stringify(removeitem)},function(data){
+				    f.remove()
+					parent.clearlayer();
+				})
+
+			}
+		}
+		};
+		$.fn.zTree.init($("#treeDemo"), setting,nodes); 
+	 
+
+	});
+
+
+</script>
+</head>
+<body>
+<div id="treeDemo" class="ztree"  ></div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<classpath>
+  <container id="Yang!org.eclipse.jst.j2ee.internal.web.container">
+    <entry id="E:/JAVA_MAR/Yang/WebContent/WEB-INF/lib/mybatis-3.1.1.jar">
+      <source-attachment-path>/Yang/WebContent/WEB-INF/lib/mybatis-3.1.1-sources.jar</source-attachment-path>
+    </entry>
+  </container>
+</classpath>

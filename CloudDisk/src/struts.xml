@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.maxSize" value="5242880000"/>
+
+    <!-- 设置上传文件的临时文件夹,默认使用javax.servlet.context.tempdir -->
+    <constant name="struts.multipart.saveDir " value="d:/tmp" />
+    <package name="default" namespace="/" extends="struts-default">       
+         <action name="reg" class="regAction" ></action>
+         <action name="code" class="codeAction" ></action>
+         <action name="quit" class="quitAction" ></action>  
+         <action name="filedelete" class="filedeleteAction"  ></action>
+         <action name="newfolder" class="newfolderAction"  ></action> 
+         
+    </package>
+    
+    <package name="json" namespace="/" extends="json-default">              
+        <action name="listpartfile" class="listpartfileAction"  >
+           <result type="json" >  
+               <param name="includeProperties">file.*</param> 
+            </result>  
+        </action>
+        <action name="filerename" class="filerenameAction"  >
+	           <result type="json" >  
+	               <param name="includeProperties">result,name</param> 
+	            </result>  
+        </action> 
+        <action name="copyfile" class="copyOfListtextfileAction"  >
+	           <result type="json" >  
+	               <param name="includeProperties">path</param> 
+	            </result>  
+        </action> 
+        <action name="getfilesnodes" class="getfilesnodesAction"  >
+	           <result type="json" >  
+	               <param name="includeProperties">node.*</param> 
+	            </result>  
+        </action> 
+        <action name="fileremove" class="fileremoveAction"  >
+           <result type="json" >  
+	               <param name="includeProperties">success</param> 
+	       </result> 
+        </action> 
+        <action name="listallfile" class="listallfileAction"  >
+           <result type="json" >  
+	               <param name="includeProperties">file.*</param> 
+	       </result> 
+        </action> 
+        <action name="getusername" class="getusernameAction"  >
+           <result type="json" >  
+	               <param name="includeProperties">username</param> 
+	       </result> 
+        </action> 
+        <action name="login" class="loginAction" >
+            <result type="json" >  
+	               <param name="includeProperties">msg</param> 
+	       </result> 
+        </action>
+        <action name="vilidmd5" class="vilidmd5Action"  >
+           <result type="json" >  
+	               <param name="includeProperties">ret</param> 
+	       </result> 
+        </action> 
+         <action name="lockfile" class="lockfileAction" >
+           <result type="json" >  
+	               <param name="includeProperties">ret</param> 
+	       </result> 
+         </action>
+          
+    </package>
+
+
+</struts>
