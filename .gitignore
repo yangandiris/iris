@@ -2,5 +2,5 @@
 RemoteSystemsTempFiles/
 Servers/
 /*.gitignore
-/*.database.properties
-/*.generatorConfig.xml
+Maven/src/main/resources/database.properties
+Maven/src/main/resources/generatorConfig.xml
