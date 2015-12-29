@@ -33,6 +33,18 @@
                     <encoding>${project.build.sourceEncoding}</encoding>  
                 </configuration>  
             </plugin>  
+            <!--自动发布至Tomcat服务器插件  -->
+            <plugin>
+		         <groupId>org.apache.tomcat.maven</groupId>
+		         <artifactId>tomcat7-maven-plugin</artifactId>
+		         <configuration>
+		            <url>http://localhost:8088/manager/text</url>
+		            <username>yang</username>
+		            <password>admin</password>
+		            <update>true</update>
+		         </configuration>
+		    </plugin>
+		       
         </plugins>  
   
         <!--配置Maven 对resource文件 过滤 -->  
