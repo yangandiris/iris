@@ -38,7 +38,7 @@
 		         <groupId>org.apache.tomcat.maven</groupId>
 		         <artifactId>tomcat7-maven-plugin</artifactId>
 		         <configuration>
-		            <url>http://localhost:8088/manager/text</url>
+		            <url>http://45.32.89.171:8080/manager/text</url>
 		            <username>yang</username>
 		            <password>admin</password>
 		            <update>true</update>

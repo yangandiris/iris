@@ -9,6 +9,5 @@ Servers/
 RemoteSystemsTempFiles/
 Servers/
 /*.gitignore
-Maven/src/main/resources/database.properties
-Maven/src/main/resources/generatorConfig.xml
 >>>>>>> branch 'master' of git@github.com:yangandiris/iris.git
+/Maven/
