@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 .metadata/
-RemoteSystemsTempFiles/
-Servers/
-/*.gitignore
 .recommenders/
-=======
-.metadata/
 RemoteSystemsTempFiles/
 Servers/
-/*.gitignore
->>>>>>> branch 'master' of git@github.com:yangandiris/iris.git
-/Maven/
+
+
